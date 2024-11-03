@@ -1,5 +1,10 @@
 using Hangfire;
 using HangfireBasicAuthenticationFilter;
+using MoodVerse.Utility.Emails;
+using MoodVerse.Utility.Emails.Interface;
+using Microsoft.EntityFrameworkCore;
+using MoodVerse.Repository;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +20,19 @@ builder.Services.AddHangfire((sp, config) =>
     config.UseSqlServerStorage(connectionString);
 });
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DbConnection"),
+        sqlServerOptions => {
+            sqlServerOptions.MigrationsAssembly("MoodVerse.Repository");
+            sqlServerOptions.CommandTimeout(3000);
+        });
+});
+
 builder.Services.AddHangfireServer();
+
+builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 
 var app = builder.Build();
 
