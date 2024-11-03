@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.API", "MoodVerse.API\MoodVerse.API.csproj", "{9157426C-ECE8-40ED-A584-15D0980D6CA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.API", "MoodVerse.API\MoodVerse.API.csproj", "{9157426C-ECE8-40ED-A584-15D0980D6CA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Utility", "MoodVerse.Utility\MoodVerse.Utility.csproj", "{D21B2729-C6F2-47ED-A95B-CCB85D27305E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Service", "MoodVerse.Service\MoodVerse.Service.csproj", "{B6823A07-8445-4509-A43E-5A89357E7D29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.Repository", "MoodVerse.Repository\MoodVerse.Repository.csproj", "{EB613FEF-F443-4754-9978-B716E349588D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.Data", "MoodVerse.Data\MoodVerse.Data.csproj", "{BC9133B0-423E-499E-A170-2245DF68EB77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{9157426C-ECE8-40ED-A584-15D0980D6CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9157426C-ECE8-40ED-A584-15D0980D6CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9157426C-ECE8-40ED-A584-15D0980D6CA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21B2729-C6F2-47ED-A95B-CCB85D27305E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21B2729-C6F2-47ED-A95B-CCB85D27305E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21B2729-C6F2-47ED-A95B-CCB85D27305E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21B2729-C6F2-47ED-A95B-CCB85D27305E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6823A07-8445-4509-A43E-5A89357E7D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6823A07-8445-4509-A43E-5A89357E7D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6823A07-8445-4509-A43E-5A89357E7D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6823A07-8445-4509-A43E-5A89357E7D29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB613FEF-F443-4754-9978-B716E349588D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB613FEF-F443-4754-9978-B716E349588D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB613FEF-F443-4754-9978-B716E349588D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB613FEF-F443-4754-9978-B716E349588D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9133B0-423E-499E-A170-2245DF68EB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9133B0-423E-499E-A170-2245DF68EB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9133B0-423E-499E-A170-2245DF68EB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9133B0-423E-499E-A170-2245DF68EB77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
