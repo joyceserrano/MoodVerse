@@ -1,9 +1,13 @@
 using Hangfire;
 using HangfireBasicAuthenticationFilter;
-using MoodVerse.Utility.Emails;
-using MoodVerse.Utility.Emails.Interface;
 using Microsoft.EntityFrameworkCore;
 using MoodVerse.Repository;
+using MoodVerse.Repository.Implementation;
+using MoodVerse.Repository.Interface;
+using MoodVerse.Service.Implementation;
+using MoodVerse.Service.Interface;
+using MoodVerse.Utility.Emails;
+using MoodVerse.Utility.Emails.Interface;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +35,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddHangfireServer();
+
+builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
+builder.Services.AddScoped<IArtistService, ArtistService>();
 
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 

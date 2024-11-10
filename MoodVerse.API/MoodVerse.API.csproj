@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MoodVerse.Repository\MoodVerse.Repository.csproj" />
+    <ProjectReference Include="..\MoodVerse.Service\MoodVerse.Service.csproj" />
     <ProjectReference Include="..\MoodVerse.Utility\MoodVerse.Utility.csproj" />
   </ItemGroup>
 
