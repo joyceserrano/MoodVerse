@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Implementation\" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoodVerse.Data\MoodVerse.Data.csproj" />
+    <ProjectReference Include="..\MoodVerse.Repository\MoodVerse.Repository.csproj" />
   </ItemGroup>
 
 </Project>
