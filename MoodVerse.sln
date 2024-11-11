@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Utility", "MoodVe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Service", "MoodVerse.Service\MoodVerse.Service.csproj", "{B6823A07-8445-4509-A43E-5A89357E7D29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.Repository", "MoodVerse.Repository\MoodVerse.Repository.csproj", "{EB613FEF-F443-4754-9978-B716E349588D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Repository", "MoodVerse.Repository\MoodVerse.Repository.csproj", "{EB613FEF-F443-4754-9978-B716E349588D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.Data", "MoodVerse.Data\MoodVerse.Data.csproj", "{BC9133B0-423E-499E-A170-2245DF68EB77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Data", "MoodVerse.Data\MoodVerse.Data.csproj", "{BC9133B0-423E-499E-A170-2245DF68EB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.Web.Server", "MoodVerse.Web\MoodVerse.Web.Server\MoodVerse.Web.Server.csproj", "{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "moodverse.web.client", "MoodVerse.Web\moodverse.web.client\moodverse.web.client.esproj", "{8545C490-0317-4469-89FB-3C0C83A42010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,16 @@ Global
 		{BC9133B0-423E-499E-A170-2245DF68EB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC9133B0-423E-499E-A170-2245DF68EB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC9133B0-423E-499E-A170-2245DF68EB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8545C490-0317-4469-89FB-3C0C83A42010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8545C490-0317-4469-89FB-3C0C83A42010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8545C490-0317-4469-89FB-3C0C83A42010}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8545C490-0317-4469-89FB-3C0C83A42010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8545C490-0317-4469-89FB-3C0C83A42010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8545C490-0317-4469-89FB-3C0C83A42010}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
