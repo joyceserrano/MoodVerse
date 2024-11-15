@@ -8,7 +8,7 @@ using MoodVerse.Service.Implementation;
 using MoodVerse.Service.Interface;
 using MoodVerse.Utility.Emails;
 using MoodVerse.Utility.Emails.Interface;
-
+using MoodVerse.Utility.Emails.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +40,8 @@ builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<IArtistService, ArtistService>();
 
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
+
+builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSettings"));
 
 var app = builder.Build();
 

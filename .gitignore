@@ -360,7 +360,5 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
-FodyWeavers.xsdEmailDispatcher.cs 
-EmailDispatcher.cs 
-"EmailDispatcher.cs" 
-"EmailDispatcher.cs" 
+/MoodVerse.API/appsettings.Development.json
+/MoodVerse.API/appsettings.json
