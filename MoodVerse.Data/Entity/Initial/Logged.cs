@@ -1,6 +1,6 @@
 ﻿using MoodVerse.Data.Entity;
 
-namespace MoodVerse.Repository.Entity.Initial
+namespace MoodVerse.Data.Entity.Initial
 {
     public class Logged : Base
     {

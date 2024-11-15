@@ -1,4 +1,4 @@
-﻿using MoodVerse.Repository.Entity.Initial;
+﻿using MoodVerse.Data.Entity.Initial;
 
 namespace MoodVerse.Data.Entity
 {

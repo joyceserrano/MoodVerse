@@ -1,4 +1,4 @@
-﻿namespace MoodVerse.Repository.Entity.Initial
+﻿namespace MoodVerse.Data.Entity.Initial
 {
     public class Base
     {
