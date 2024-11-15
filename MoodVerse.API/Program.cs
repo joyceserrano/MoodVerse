@@ -24,6 +24,8 @@ builder.Services.AddHangfire((sp, config) =>
     config.UseSqlServerStorage(connectionString);
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(
@@ -37,7 +39,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddHangfireServer();
 
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
+builder.Services.AddScoped<ILookupRepository, LookupRepository>();
+
 builder.Services.AddScoped<IArtistService, ArtistService>();
+builder.Services.AddScoped<ILookupService, LookupService>();
 
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 
