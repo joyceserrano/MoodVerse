@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoodVerse.Data.Entity;
+using MoodVerse.Data.Entity.Lookups;
 using MoodVerse.Data.Mapping;
+using MoodVerse.Data.Mapping.Lookup;
 
 namespace MoodVerse.Repository
 {
@@ -12,6 +14,7 @@ namespace MoodVerse.Repository
           
         }
         public DbSet<Artist> Artist { get; set; }
+        public DbSet<PrimaryEmotionType> PrimaryEmotionType { get; set; }
         public DbSet<Quote> Quote { get; set; }
         public DbSet<User> User { get; set; }
 
@@ -20,6 +23,7 @@ namespace MoodVerse.Repository
             base.OnModelCreating(modelBuilder);
 
             new ArtistMap(modelBuilder);
+            new PrimaryEmotionTypeMap(modelBuilder);
             new QuoteMap(modelBuilder);
             new UserMap(modelBuilder);
         }
