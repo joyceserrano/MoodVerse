@@ -1,5 +1,4 @@
 ﻿using MoodVerse.Data.Entity;
-using MoodVerse.Repository.Implementation;
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto;
 using MoodVerse.Service.Interface;
@@ -10,7 +9,7 @@ namespace MoodVerse.Service.Implementation
     {
         private IArtistRepository ArtistRepository { get; }
 
-        public ArtistService(ArtistRepository artistRepository) {
+        public ArtistService(IArtistRepository artistRepository) {
             ArtistRepository = artistRepository;
         }
 
