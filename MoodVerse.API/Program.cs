@@ -9,6 +9,7 @@ using MoodVerse.Service.Interface;
 using MoodVerse.Utility.Emails;
 using MoodVerse.Utility.Emails.Interface;
 using MoodVerse.Utility.Emails.Model;
+using MoodVerse.Utility.JWT.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ builder.Services.AddScoped<ILookupService, LookupService>();
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 
 builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<Jwt>(builder.Configuration.GetSection("Jwt"));
 
 var app = builder.Build();
 
