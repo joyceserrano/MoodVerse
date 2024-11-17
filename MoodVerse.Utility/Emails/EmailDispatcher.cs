@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MoodVerse.Utility.Emails.Interface;
-using MoodVerse.Utility.Emails.Models;
+using MoodVerse.Utility.Emails.Model;
 
 namespace MoodVerse.Utility.Emails
 {

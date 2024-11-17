@@ -1,4 +1,4 @@
-﻿namespace MoodVerse.Utility.Emails.Models
+﻿namespace MoodVerse.Utility.Emails.Model
 {
     public class EmailSetting
     {

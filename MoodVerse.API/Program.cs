@@ -8,7 +8,7 @@ using MoodVerse.Service.Implementation;
 using MoodVerse.Service.Interface;
 using MoodVerse.Utility.Emails;
 using MoodVerse.Utility.Emails.Interface;
-using MoodVerse.Utility.Emails.Models;
+using MoodVerse.Utility.Emails.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
