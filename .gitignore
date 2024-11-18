@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 /MoodVerse.API/appsettings.Development.json
 /MoodVerse.API/appsettings.json
+/MoodVerse.Web/moodverse.web.client/src/variables.json

@@ -18,4 +18,17 @@ axiosConnector.interceptors.request.use(
     }
 );
 
+axiosConnector.interceptors.response.use(
+    async (response) => response,
+
+    async (error) => {
+        console.error('Error received:', error);
+
+        if (error.response && error.response.status === 401)
+            console.log('Unauthorized, refresh token...');
+
+        return Promise.reject(error);
+    }
+);
+
 export default axiosConnector;
