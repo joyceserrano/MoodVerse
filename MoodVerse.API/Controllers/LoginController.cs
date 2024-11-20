@@ -13,14 +13,15 @@ namespace MoodVerse.API.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private string JwtKey  {get; }
+        private IOptions<Jwt> JwtInfo {get; }
 
-        public LoginController(IOptions<Jwt> Jwt)
+        public LoginController(IOptions<Jwt> jwtInfo)
         {
-            JwtKey = Jwt.Value.Key;
-        } 
+            JwtInfo = jwtInfo;
+        }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] LoginRequestModel loginRequestModel)
         {
             if (!ModelState.IsValid)
@@ -30,14 +31,21 @@ namespace MoodVerse.API.Controllers
 
             return Ok(token);
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Test()
+        {
+            return Ok("Test Succeeded");
+        }
+
         private string GenerateToken()
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtInfo.Value.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: "YourIssuer",
-                audience: "YourAudience",
+                issuer: JwtInfo.Value.Issuer,
                 expires: DateTime.Now.AddHours(1),
                 signingCredentials: credentials
             );
