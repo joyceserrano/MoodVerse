@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MoodVerse.Data\MoodVerse.Data.csproj" />
     <ProjectReference Include="..\MoodVerse.Repository\MoodVerse.Repository.csproj" />
+    <ProjectReference Include="..\MoodVerse.Utility\MoodVerse.Utility.csproj" />
   </ItemGroup>
 
 </Project>
