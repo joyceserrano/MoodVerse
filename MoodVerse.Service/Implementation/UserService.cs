@@ -21,6 +21,7 @@ namespace MoodVerse.Service.Implementation
                 LastName = userDto.LastName,
                 CreatedOn = DateTime.UtcNow,
                 CreatorId = userDto.CreatorId,
+                EmailAddress = userDto.EmailAddress,
             }; 
 
             await UserRepository.InsertAsync(user);

@@ -23,7 +23,6 @@ namespace MoodVerse.API.Controllers
 
             var jobId = BackgroundJob.Schedule(() => EmailDispatcher.SendAsync("Taylor Swift Quotes", $@"Im intimidated by the fear of being average."), scheduleDateTime);
 
-            Console.WriteLine(jobId);
             return Ok(jobId);
         }
     }
