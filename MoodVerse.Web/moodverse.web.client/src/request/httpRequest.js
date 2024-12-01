@@ -10,7 +10,6 @@ const requests = {
     delete: (url, body) => axiosConnector.delete(url, { data: body }).then(responseBody),
 };
 
-
 const Login = {
     add: (params) => requests.post('api/login', params)
 };
@@ -19,4 +18,4 @@ const httpRequest = {
     Login
 };
 
-export default httpRequest;
+export { httpRequest };

@@ -1,25 +1,26 @@
-import './App.css';
-import httpRequest from './request/httpRequest.js';
-import { useQuery } from '@tanstack/react-query';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginPage from '../src/pages/authentication/LoginPage';
+import RootLayoutPage from '../src/root/RootLayoutPage';
+import { QueryClientProvider } from '@tanstack/react-query';
+import queryClient from "./../src/utility/query-client"
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <RootLayoutPage />,
+        children: []
+    },
+    {
+        path: '/login',
+        element: <LoginPage />,
+    }, 
+]);
 
 const App = () => {
-    const useLogin = (params) => {
-        return useQuery({
-            queryKey: ['login', params],
-            queryFn: () => httpRequest.Login.add(params),
-            enabled: !!params, 
-            onSuccess: (data) => {
-                console.log('Login successful:', data); 
-            },
-        });
-    };
-
-    useLogin({username:'sample', password: 'sample'});
-
     return (
-        <div>
-            <p>This component demonstrates fetching data from the server.</p>
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
     );
 }
 

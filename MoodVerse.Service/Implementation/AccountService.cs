@@ -23,8 +23,7 @@ namespace MoodVerse.Service.Implementation
 
             var newAccount = new Account()
             {
-                []
-                UserId = accountDto.User,
+                UserId = accountDto.UserId,
                 Salt = base64Salt,
                 Hash = hash,
             };
