@@ -14,8 +14,13 @@ const Login = {
     add: (params) => requests.post('api/login', params)
 };
 
+const Lookups = {
+    getPrimaryEmotions: () => requests.get('api/lookup/primary-emotion-type')
+};
+
 const httpRequest = {
-    Login
+    Login,
+    Lookups
 };
 
 export { httpRequest };

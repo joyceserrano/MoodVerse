@@ -1,0 +1,103 @@
+$colors:  blue;
+
+.primary_emotions_page {
+    background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+    height: 100%;
+
+    .submit_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+
+        .submit_btn {
+            border-radius: 10%;
+            border: none;
+            color: white;
+            border-radius: 50%;
+            background-color: #0093E9;
+            font-size: 20px;
+            padding: 20px;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+            margin: auto
+        }
+    }
+
+    .emotions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transition: transform 0.3s ease, 0.8s ease;
+            color: white;
+
+            &:hover {
+                transform: translateY(0) scale(1.2);
+            }
+        }
+
+        .circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            animation: fadeInToTop 0.8s ease-out forwards;
+        }
+
+
+        .happy {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .sad {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .disgusted {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .angry {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .fearful {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .bad {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .surprised {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+
+        @keyframes fadeInToTop {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+}
