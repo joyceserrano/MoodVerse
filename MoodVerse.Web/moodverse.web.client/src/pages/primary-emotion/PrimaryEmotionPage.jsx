@@ -1,21 +1,31 @@
 import classes from "./PrimaryEmotionPage.module.scss";
 import { httpRequest } from '../../request/httpRequest';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import EmotionNotes from './EmotionNotes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { gsap } from "gsap";
 import { useInput } from "../../hook/useInput";
 
 const PrimaryEmotionPage = () => {
-    const [selectedEmotion, setSelectedEmotion] = useState(null);
+    const navigate = useNavigate();
+    const [selectedEmotionIndex, setSelectedEmotion] = useState(null);
 
     const containerRefs = useRef([]);
+    const iconRef = useRef(null);
 
     const { data: emotions } = useQuery({
         queryKey: ['primary-emotions'],
         queryFn: httpRequest.Lookups.getPrimaryEmotions,
+    });
+
+    const { mutate } = useMutation({
+        mutationFn: httpRequest.Notes.add,
+        onSuccess: () => {
+            navigate("/notes");
+        },
     });
 
     const {
@@ -47,6 +57,23 @@ const PrimaryEmotionPage = () => {
         });
     };
 
+    const handleMouseEnter = () => {
+        gsap.to(iconRef.current, { scale: 1.5, duration: 0.3 });
+    };
+
+    const handleMouseLeave = () => {
+        gsap.to(iconRef.current, { scale: 1, duration: 0.3 });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        mutate({
+            primaryEmotionTypeId: emotions[selectedEmotionIndex].id,
+            text: noteValue
+        });
+    }
+
     return (
         <div className={classes.primary_emotions_page}>
             <div className={classes.emotions}>
@@ -59,12 +86,14 @@ const PrimaryEmotionPage = () => {
                         </div>
                     ))}
             </div>
-            {selectedEmotion && <EmotionNotes name={emotions[selectedEmotion].name} onChange={onNoteChange} />}
-            {selectedEmotion && <div className={classes.submit_container} >
-                <button className={classes.submit_btn}>
-                    <FontAwesomeIcon icon={faArrowRight} />
-                </button>
-            </div>}
+            <form onSubmit={handleSubmit}>
+                {selectedEmotionIndex != null && <EmotionNotes name={emotions[selectedEmotionIndex].name} onChange={onNoteChange} />}
+                {selectedEmotionIndex != null && <div className={classes.submit_container} >
+                    <button className={classes.submit_btn} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                        <FontAwesomeIcon ref={iconRef} icon={faArrowRight} />
+                    </button>
+                </div>}
+            </form>
         </div>
     );
 };

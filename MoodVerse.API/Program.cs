@@ -116,9 +116,11 @@ builder.Services.AddHangfireServer();
 
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<ILookupRepository, LookupRepository>();
+builder.Services.AddScoped<INoteRepository, NoteRepository>();
 
 builder.Services.AddScoped<IArtistService, ArtistService>();
 builder.Services.AddScoped<ILookupService, LookupService>();
+builder.Services.AddScoped<INoteService, NoteService>();
 
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 

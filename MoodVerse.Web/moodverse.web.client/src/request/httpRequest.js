@@ -18,9 +18,14 @@ const Lookups = {
     getPrimaryEmotions: () => requests.get('api/lookup/primary-emotion-type')
 };
 
+const Notes = {
+    add: (params) => requests.post('api/note', params)
+};
+
 const httpRequest = {
     Login,
-    Lookups
+    Lookups,
+    Notes
 };
 
 export { httpRequest };
