@@ -3,11 +3,13 @@ using MoodVerse.Data.Entity;
 
 namespace MoodVerse.Data.Mapping
 {
-    public class NotesMap
+    public class NoteMap
     {
-        public NotesMap(ModelBuilder modelBuilder) {
+        public NoteMap(ModelBuilder modelBuilder) {
 
-            var entityBuilder = modelBuilder.Entity<Notes>();
+            var entityBuilder = modelBuilder.Entity<Note>();
+
+            entityBuilder.HasKey(n => n.Id);
 
             entityBuilder.Property(n => n.Text).IsRequired();
 

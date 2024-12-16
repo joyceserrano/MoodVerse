@@ -15,7 +15,7 @@ namespace MoodVerse.Repository
         }
         public DbSet<Account> Account { get; set; }
         public DbSet<Artist> Artist { get; set; }
-        public DbSet<Notes> Notes { get; set; }
+        public DbSet<Note> Note { get; set; }
         public DbSet<PrimaryEmotionType> PrimaryEmotionType { get; set; }
         public DbSet<Quote> Quote { get; set; }
         public DbSet<User> User { get; set; }
@@ -26,7 +26,7 @@ namespace MoodVerse.Repository
 
             new AccountMap(modelBuilder);
             new ArtistMap(modelBuilder);
-            new NotesMap(modelBuilder);
+            new NoteMap(modelBuilder);
             new PrimaryEmotionTypeMap(modelBuilder);
             new QuoteMap(modelBuilder);
             new UserMap(modelBuilder);
