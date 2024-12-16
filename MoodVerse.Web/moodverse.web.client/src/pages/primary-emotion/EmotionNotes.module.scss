@@ -6,21 +6,23 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    color: white;
 
     .header_text {
         color: white;
+        font-size: 70px;
+        margin: 0;
+        padding: 0;
+
+        .gradient_text {
+            background: linear-gradient(90deg, #ff7e5f, #feb47b); 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 
     h1 {
         font-size: 50px;
-    }
-
-    .header_name {
-        background: linear-gradient(to right, #ff7e5f, #feb47b);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        font-size: 80px;
     }
 
     textarea {
@@ -35,29 +37,22 @@
         font-weight: 500;
     }
 
-    .line_1 {
-        position: relative;
-        top: 50%;
-        width: 24em;
-        margin: 0 auto;
-        border-right: 2px solid rgba(255,255,255,.75);
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        transform: translateY(-50%);
-    }
-    /* Animation */
-    .anim_typewriter {
-        animation: typewriter 4s steps(44) 1s 1 normal both, blinkTextCursor 500ms steps(44) infinite normal;
+    .cursor {
+        display: inline-block;
+        animation: blink 1s infinite;
+        border: 1px white solid;
+        height: 50px;
+        border-right: 3px solid rgba(255,255,255,.75);
+        margin-left: 10px;
     }
 
-    @keyframes typewriter {
-        from {
-            width: 0;
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
         }
 
-        to {
-            width: 24em;
+        50% {
+            opacity: 0;
         }
     }
 
