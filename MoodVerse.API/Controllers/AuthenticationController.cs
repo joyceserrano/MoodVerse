@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using MoodVerse.API.Models.RequestModel.Account;
 using MoodVerse.API.Models.RequestModel.Login;
+using MoodVerse.Service.Dto.Account;
+using MoodVerse.Service.Dto.User;
+using MoodVerse.Service.Interface;
 using MoodVerse.Utility.JWT.Model;
 
 namespace MoodVerse.API.Controllers
@@ -11,10 +15,14 @@ namespace MoodVerse.API.Controllers
     public class AuthenticationController : ControllerBase
     {
         private IOptions<Jwt> JwtInfo {get; }
+        private IAccountService AccountService { get; }
+        private IUserService UserService { get; }
 
-        public AuthenticationController(IOptions<Jwt> jwtInfo)
+        public AuthenticationController(IOptions<Jwt> jwtInfo, IAccountService accountService, IUserService userService)
         {
             JwtInfo = jwtInfo;
+            AccountService = accountService;
+            UserService = userService;
         }
 
         [HttpPost("login")]
@@ -25,6 +33,34 @@ namespace MoodVerse.API.Controllers
                 return BadRequest("Invalid inputs on model");
 
             return Ok();
+        }
+
+        [HttpPost("create-user")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestModel requestModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid inputs on model");
+
+            var userDto = new InsertUserDto()
+            {
+                FirstName = requestModel.FirstName,
+                LastName = requestModel.LastName,
+                EmailAddress = requestModel.EmailAddress,
+            };
+
+            var user = await UserService.InsertAsync(userDto);
+
+            var accountDto = new InsertAccountDto()
+            {
+                UserName = requestModel.Username,
+                Password = requestModel.Password,
+                UserId = user.Id,
+            };
+
+            await AccountService.InsertAsync(accountDto);
+
+            return Ok(user.Id);
         }
 
         [HttpGet]

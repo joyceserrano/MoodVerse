@@ -8,7 +8,15 @@
     background-color: transparent;
 }
 
+
+
 html, body {
+
+    .toast {
+        height: 4px; 
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    }
+
     height: 100%;
     margin: 0;
     padding: 0;

@@ -1,12 +1,13 @@
 ﻿using MoodVerse.Data.Entity;
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto.Account;
+using MoodVerse.Service.Interface;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace MoodVerse.Service.Implementation
 {
-    public class AccountService
+    public class AccountService  : IAccountService
     {
         private IAccountRepository AccountRepository { get; set; }
         public AccountService(IAccountRepository accountRepository)
@@ -16,7 +17,6 @@ namespace MoodVerse.Service.Implementation
 
         public async Task InsertAsync(InsertAccountDto accountDto)
         {
-
             var salt = GenerateSalt();
             var hash = HashPassword(accountDto.Password, salt);
             string base64Salt = Convert.ToBase64String(salt);
@@ -30,9 +30,10 @@ namespace MoodVerse.Service.Implementation
             };
 
             await AccountRepository.InsertAsync(newAccount);
+            await AccountRepository.SaveChanges();
         }
 
-        public (string Hash, string Salt) HashPassword(string password)
+        private static (string Hash, string Salt) HashPassword(string password)
         {
             byte[] salt = RandomNumberGenerator.GetBytes(25);
 
@@ -46,7 +47,7 @@ namespace MoodVerse.Service.Implementation
             return (Convert.ToBase64String(hash), Convert.ToBase64String(salt));
         }
 
-        public bool VerifyPassword(string password, string storedHash, string storedSalt)
+        private bool VerifyPassword(string password, string storedHash, string storedSalt)
         {
             byte[] hashBytes = Convert.FromBase64String(storedHash);
             byte[] saltBytes = Convert.FromBase64String(storedSalt);

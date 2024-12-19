@@ -6,6 +6,7 @@ import NotePage from '../src/pages/note/NotePage';
 import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from "./../src/utility/query-client"
 import CreateUserPage from './pages/authentication/CreateUser';
+import { ToastContainer } from 'react-toastify';
 
 const router = createBrowserRouter([
     {
@@ -33,9 +34,10 @@ const router = createBrowserRouter([
 
 const App = () => {
     return (
-            <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />
-            </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ToastContainer />
+        </QueryClientProvider>
     );
 }
 

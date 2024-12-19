@@ -117,10 +117,14 @@ builder.Services.AddHangfireServer();
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<ILookupRepository, LookupRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IArtistService, ArtistService>();
 builder.Services.AddScoped<ILookupService, LookupService>();
 builder.Services.AddScoped<INoteService, NoteService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 

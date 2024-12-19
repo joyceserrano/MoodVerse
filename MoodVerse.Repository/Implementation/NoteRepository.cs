@@ -9,5 +9,10 @@ namespace MoodVerse.Repository.Implementation
         {
             await Context.AddAsync(note);
         }
+
+        public async Task GetByUserId(Note note)
+        {
+            await Context.AddAsync(note);
+        }
     }
 }

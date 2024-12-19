@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import { httpRequest } from '../../request/httpRequest';
 import { useMutation } from '@tanstack/react-query';
 import { useInput } from '../../hook/useInput';
+import { toast } from 'react-toastify';
+
 
 const CreateUserPage = () => {
     const navigate = useNavigate();
@@ -35,6 +37,7 @@ const CreateUserPage = () => {
     const { mutate } = useMutation({
         mutationFn: httpRequest.Authentication.createUser,
         onSuccess: () => {
+            toast.success('Created User Successful!');
             navigate("/login");
         },
     });

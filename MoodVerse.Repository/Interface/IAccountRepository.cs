@@ -2,7 +2,7 @@
 
 namespace MoodVerse.Repository.Interface
 {
-    public interface IAccountRepository
+    public interface IAccountRepository : IRepository
     {
         Task InsertAsync(Account account);
     }

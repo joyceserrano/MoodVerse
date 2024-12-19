@@ -1,19 +1,19 @@
 ﻿using MoodVerse.Data.Entity;
-using MoodVerse.Data.Entity.Initial;
-using MoodVerse.Repository.Implementation;
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto.User;
+using MoodVerse.Service.Interface;
 
 namespace MoodVerse.Service.Implementation
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private IUserRepository UserRepository { get; }
+
         public UserService(IUserRepository userRepository) {
             UserRepository = userRepository;
         }
 
-        public async Task InsertAsync(InsertUserDto userDto) 
+        public async Task<User> InsertAsync(InsertUserDto userDto) 
         {
             var user = new User()
             {
@@ -25,6 +25,9 @@ namespace MoodVerse.Service.Implementation
             }; 
 
             await UserRepository.InsertAsync(user);
+            await UserRepository.SaveChanges();
+
+            return user;
         }
     }
 }
