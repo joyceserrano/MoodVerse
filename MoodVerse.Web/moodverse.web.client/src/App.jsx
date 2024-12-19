@@ -5,6 +5,7 @@ import RootLayoutPage from '../src/root/RootLayoutPage';
 import NotePage from '../src/pages/note/NotePage';
 import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from "./../src/utility/query-client"
+import CreateUserPage from './pages/authentication/CreateUser';
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: '/notes',
         element: <NotePage />,
+    },
+    {
+        path: '/create-user',
+        element: <CreateUserPage />,
     },
 ]);
 

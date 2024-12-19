@@ -1,16 +1,13 @@
-.login_page {
+.create_user_page {
     background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    color: white;
 
-    .logo {
-        width: 300px;
-        padding: 30px;
-    }
-
-    .login_container {
+    .form_container {
         width: 400px;
         height: 400px;
         background: rgb(0 0 0 / 20%);
@@ -27,11 +24,10 @@
         font-size: 14px;
         flex-direction: column;
 
-        .login_inputs {
+        .form_inputs {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            width: 90%;
 
             .input_container {
                 border-radius: 5px;
@@ -56,24 +52,41 @@
                     background: transparent;
                 }
             }
-        }
 
-        .buttons_container {
-            width: 90%;
-            margin: 10px;
+            .submit_btn {
+                outline: none;
+                border-radius: 5px;
+                border: none;
+                height: 40px;
+                background: #555f6a;
+                color: white;
+                font-weight: bold;
 
-            .button {
-                background: #060e17;
+                &:hover {
+                    cursor: pointer;
+                }
 
-                .flair {
-                    background: linear-gradient(90deg, rgba(32,91,235,1) 0%, rgba(27,190,217,1) 51%, rgba(56,201,23,1) 100%);
+                &:active {
+                    background: #202028;
                 }
             }
-        }
 
-        .create_user_link{
-            &:hover{
-                cursor: pointer;
+            .cancel_btn {
+                outline: none;
+                border-radius: 5px;
+                border: none;
+                height: 40px;
+                background: #555f6a;
+                color: white;
+                font-weight: bold;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:active {
+                    background: #202028;
+                }
             }
         }
     }

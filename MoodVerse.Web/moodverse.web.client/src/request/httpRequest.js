@@ -10,6 +10,10 @@ const requests = {
     delete: (url, body) => axiosConnector.delete(url, { data: body }).then(responseBody),
 };
 
+const Authentication = {
+    createUser: (params) => requests.post('api/authentication/create-user', params)
+};
+
 const Login = {
     add: (params) => requests.post('api/login', params)
 };
@@ -23,6 +27,7 @@ const Notes = {
 };
 
 const httpRequest = {
+    Authentication,
     Login,
     Lookups,
     Notes
