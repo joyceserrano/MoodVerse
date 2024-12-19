@@ -11,6 +11,8 @@ namespace MoodVerse.Data.Mapping
 
             entityBuilder.HasKey(a => a.Id);
 
+            entityBuilder.Property(a => a.Username).IsRequired();
+
             entityBuilder
                .HasOne(a => a.User)
                .WithOne()

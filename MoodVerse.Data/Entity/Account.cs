@@ -8,5 +8,6 @@ namespace MoodVerse.Data.Entity
       public User User { get; set; } = default!;
       public required string Hash { get; set; }
       public required string Salt { get; set; }
+      public required string Username { get; set; }
     }
 }
