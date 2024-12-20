@@ -23,7 +23,8 @@ namespace MoodVerse.API.Controllers
             var dto = new NoteDto()
             {
                 PrimaryEmotionTypeId = requestModel.PrimaryEmotionTypeId,
-                Text = requestModel.Text
+                Text = requestModel.Text,
+                Title = requestModel.Title
             };
 
             await NoteService.InsertAsync(dto);

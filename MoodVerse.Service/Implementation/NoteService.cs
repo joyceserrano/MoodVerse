@@ -20,6 +20,7 @@ namespace MoodVerse.Service.Implementation
                 Id = Guid.NewGuid(),    
                 PrimaryEmotionTypeId = noteDto.PrimaryEmotionTypeId,
                 Text = noteDto.Text,
+                Title = noteDto.Title,
                 CreatedOn = DateTime.UtcNow,
             };
 
