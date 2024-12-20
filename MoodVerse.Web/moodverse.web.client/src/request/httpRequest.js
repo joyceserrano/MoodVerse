@@ -1,5 +1,13 @@
 import axiosConnector from "./axios";
 
+const createQueryParams = (params) => {
+    const filteredParams = Object.entries(params)
+        .filter(([, value]) => value !== undefined && value !== null)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+
+    return filteredParams.length ? `?${filteredParams.join('&')}` : '';
+};
+
 const responseBody = (response) => response.data;
 
 const requests = {
@@ -23,7 +31,8 @@ const Lookups = {
 };
 
 const Notes = {
-    add: (params) => requests.post('api/note', params)
+    add: (params) => requests.post('api/note', params),
+    filter: (params) => requests.get(`api/note/${createQueryParams(params)}`)
 };
 
 const httpRequest = {

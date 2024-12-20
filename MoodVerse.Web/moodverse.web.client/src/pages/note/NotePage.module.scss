@@ -1,0 +1,78 @@
+.note_page {
+    background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    color: white;
+    padding: 20px;
+
+    .card {
+        background: rgb(0 0 0 / 20%);
+        border-radius: 15px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 600px;
+        min-height: 300px;
+        overflow: hidden;
+        padding: 20px;
+        margin: 10px;
+        text-overflow: ellipsis;
+        position: relative;
+
+        &:hover {
+            border: 1px solid grey;
+            background: #051937;
+        }
+
+        .calendar {
+            border: 1px solid white;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100px;
+
+            .date {
+                font-size: 40px;
+                font-weight: 600;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+            cursor: pointer;
+            align-items: flex-end;
+            align-content: flex-end;
+        }
+
+        .flair {
+            position: absolute;
+            top: 500px;
+            left: 400px;
+            width: 700px;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+}
