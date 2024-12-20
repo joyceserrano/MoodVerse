@@ -12,6 +12,7 @@ namespace MoodVerse.Data.Mapping
             entityBuilder.HasKey(n => n.Id);
 
             entityBuilder.Property(n => n.Text).IsRequired();
+            entityBuilder.Property(n => n.Title).IsRequired();
 
             entityBuilder.Property(n => n.PrimaryEmotionTypeId).IsRequired();
 
