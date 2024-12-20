@@ -2,7 +2,6 @@
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto.Note;
 using MoodVerse.Service.Interface;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MoodVerse.Service.Implementation
 {
@@ -26,6 +25,11 @@ namespace MoodVerse.Service.Implementation
 
             await NoteRepository.InsertAsync(note);
             await NoteRepository.SaveChanges();
+        }
+
+        public async Task<IEnumerable<Note>> GetAllAsync(Guid userId, int? skip = null, int? take = null)
+        {
+            return await NoteRepository.GetAllAsync(userId, skip, take);
         }
     }
 }

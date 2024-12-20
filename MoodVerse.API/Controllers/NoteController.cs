@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MoodVerse.API.Models.RequestModel.Note;
 using MoodVerse.Service.Dto.Note;
+using MoodVerse.Service.Implementation;
 using MoodVerse.Service.Interface;
 
 namespace MoodVerse.API.Controllers
@@ -27,6 +28,13 @@ namespace MoodVerse.API.Controllers
 
             await NoteService.InsertAsync(dto);
 
+            return Ok(dto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddNote(Guid userId, int? skip, int? take)
+        {
+            var dto = await NoteService.GetAllAsync(userId, skip, take);
             return Ok(dto);
         }
     }

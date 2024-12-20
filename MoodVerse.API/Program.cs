@@ -93,6 +93,11 @@ builder.Services.AddAuthentication(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddRouting(options =>
+{
+    options.LowercaseUrls = true;
+});
+
 builder.Services.AddHangfire((sp, config) =>
 {
     var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString("DbConnection");
