@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MoodVerse.API.Models.RequestModel.Account;
-using MoodVerse.API.Models.RequestModel.Login;
 using MoodVerse.Service.Dto.Account;
 using MoodVerse.Service.Dto.User;
 using MoodVerse.Service.Interface;
@@ -17,22 +16,36 @@ namespace MoodVerse.API.Controllers
         private IOptions<Jwt> JwtInfo {get; }
         private IAccountService AccountService { get; }
         private IUserService UserService { get; }
+        private IAuthenticationService AuthenticationService { get; }
 
-        public AuthenticationController(IOptions<Jwt> jwtInfo, IAccountService accountService, IUserService userService)
+        public AuthenticationController(IOptions<Jwt> jwtInfo, IAccountService accountService, IUserService userService, IAuthenticationService authenticationService)
         {
             JwtInfo = jwtInfo;
             AccountService = accountService;
             UserService = userService;
+            AuthenticationService = authenticationService;
         }
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] LoginRequestModel loginRequestModel)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginRequestModel loginRequestModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid inputs on model");
 
-            return Ok();
+            var account = await AccountService.GetByUsernameAsync(loginRequestModel.Username);
+
+            if (account == null)
+                return NotFound("Username not found");
+
+            var isPasswordValid = AccountService.VerifyPassword(loginRequestModel.Password, account.Hash, account.Salt);
+
+            if (!isPasswordValid) 
+                return BadRequest("Password Wrong");
+
+            var tokens = AuthenticationService.GenerateTokens(account);
+
+            return Ok(tokens);
         }
 
         [HttpPost("create-user")]

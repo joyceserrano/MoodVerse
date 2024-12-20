@@ -3,56 +3,91 @@ import { useMutation } from '@tanstack/react-query';
 import { useInput } from '../../hook/useInput';
 import classes from "./LoginPage.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../components/commons/Button';
 import logo from "../../assets/logo.svg";
 import { useNavigate } from "react-router";
+import { gsap } from 'gsap';
+import cookies from '../../utility/cookies';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const navigate = useNavigate();
 
     const {
-        value: emailValue,
-        onChange: emailOnChange
+        value: usernameValue,
+        onChange: usernameOnChange
     } = useInput(""); 
 
-  
-    //const useLogin = (params) => {
-    //    return useQuery({
-    //        queryKey: ['login', params],
-    //        queryFn: () => httpRequest.Login.add(params),
-    //        enabled: !!params,
+    const {
+        value: passwordValue,
+        onChange: passwordOnChange
+    } = useInput("");
 
-    //        onSuccess: () => {
+    const { mutate } = useMutation({
+        mutationFn: (credentials) => httpRequest.Authentication.login(credentials),
+        onSuccess: (response) => {
+            cookies.set('token', response.accessToken);
+            gsap.to(`.${classes.login_container}`, {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+                onComplete: () => navigate("/emotions")
+            });
+        },
+        onError: (error) => {
+            toast.error(error?.response?.data?.message || 'An error occurred during login');
+        }
+    });
 
-    //        },
-    //    });
-    //};
-
-    const onSubmit = () => {
-        
-    //    useLogin({ username: 'sample', password: 'sample' });
+    const onSubmit = (e) => {
+        e.preventDefault();
+        mutate({ 
+            username: usernameValue, 
+            password: passwordValue 
+        });
     };
 
     return (
         <div className={classes.login_page}>
-            <div className={classes.login_container}>
+            <form className={classes.login_container} onSubmit={onSubmit}>
                 <img src={logo} className={classes.logo} alt="logo" />
                 <div className={classes.login_inputs}>
                     <div className={classes.input_container}>
-                        <FontAwesomeIcon icon={faCoffee} className={classes.icons} />
-                        <input type="text" placeholder="Enter your email" onChange={emailOnChange} value={emailValue} />
+                        <FontAwesomeIcon icon={faUser} className={classes.icons} />
+                        <input 
+                            type="text" 
+                            placeholder="Enter your username" 
+                            onChange={usernameOnChange} 
+                            value={usernameValue} 
+                        />
                     </div>
                     <div className={classes.input_container}>
                         <FontAwesomeIcon icon={faLock} className={classes.icons} />
-                        <input type="password" placeholder="Password" />
+                        <input 
+                            type="password" 
+                            placeholder="Password" 
+                            onChange={passwordOnChange}
+                            value={passwordValue}
+                        />
                     </div>
                 </div>
                 <div className={classes.buttons_container}>
-                    <Button className={classes.button} label="Submit" />
+                    <Button 
+                        className={classes.button} 
+                        label="Submit" 
+                        type="submit"
+                    />
                 </div>
-                <p className={classes.create_user_link} onClick={() => navigate("/create-user") }>No Account? Create a new user</p>
-            </div>
+                <p className={classes.create_user_link} onClick={() => {
+                    gsap.to(`.${classes.login_container}`, {
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: "power2.inOut",
+                        onComplete: () => navigate("/create-user")
+                    });
+                }}>No Account? Create a new user</p>
+            </form>
         </div>
     );
 };

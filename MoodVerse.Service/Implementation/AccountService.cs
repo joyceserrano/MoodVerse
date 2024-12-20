@@ -1,18 +1,31 @@
-﻿using MoodVerse.Data.Entity;
+﻿using AutoMapper;
+using MoodVerse.Data.Entity;
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto.Account;
 using MoodVerse.Service.Interface;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace MoodVerse.Service.Implementation
 {
     public class AccountService  : IAccountService
     {
         private IAccountRepository AccountRepository { get; set; }
-        public AccountService(IAccountRepository accountRepository)
+        private IMapper Mapper { get; set; }
+
+        public AccountService(IAccountRepository accountRepository, IMapper mapper)
         {
             AccountRepository = accountRepository;
+            Mapper = mapper;
+        }
+
+        public async Task<AccountDto?> GetByUsernameAsync(string username)
+        {
+            var account = await AccountRepository.GetByUsernameAsync(username);
+
+            if (account == null)
+                return null;
+
+            return Mapper.Map<AccountDto>(account);
         }
 
         public async Task InsertAsync(InsertAccountDto accountDto)
@@ -27,27 +40,26 @@ namespace MoodVerse.Service.Implementation
                 UserId = accountDto.UserId,
                 Salt = base64Salt,
                 Hash = hash,
+                CreatedOn = DateTime.Now,
             };
 
             await AccountRepository.InsertAsync(newAccount);
             await AccountRepository.SaveChanges();
         }
 
-        private static (string Hash, string Salt) HashPassword(string password)
+        private static string HashPassword(string password, byte[] salt)
         {
-            byte[] salt = RandomNumberGenerator.GetBytes(25);
-
             byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
-               password,
-               salt,
-               iterations: 100_000,
-               HashAlgorithmName.SHA256,
-               outputLength: 32);
+                password,
+                salt,
+                iterations: 100_000,
+                HashAlgorithmName.SHA256,
+                outputLength: 32);
 
-            return (Convert.ToBase64String(hash), Convert.ToBase64String(salt));
+            return Convert.ToBase64String(hash);
         }
 
-        private bool VerifyPassword(string password, string storedHash, string storedSalt)
+        public bool VerifyPassword(string password, string storedHash, string storedSalt)
         {
             byte[] hashBytes = Convert.FromBase64String(storedHash);
             byte[] saltBytes = Convert.FromBase64String(storedSalt);
@@ -64,28 +76,7 @@ namespace MoodVerse.Service.Implementation
 
         private static byte[] GenerateSalt()
         {
-            using var rng = RandomNumberGenerator.Create();
-            byte[] salt = new byte[25];
-            rng.GetBytes(salt);
-            return salt;
-        }
-
-        private static string HashPassword(string password, byte[] salt)
-        {
-
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-            byte[] saltedPassword = new byte[passwordBytes.Length + salt.Length];
-
-            Buffer.BlockCopy(passwordBytes, 0, saltedPassword, 0, passwordBytes.Length);
-            Buffer.BlockCopy(salt, 0, saltedPassword, passwordBytes.Length, salt.Length);
-
-            byte[] hashedBytes = SHA256.HashData(saltedPassword);
-
-            byte[] hashedPasswordWithSalt = new byte[hashedBytes.Length + salt.Length];
-            Buffer.BlockCopy(salt, 0, hashedPasswordWithSalt, 0, salt.Length);
-            Buffer.BlockCopy(hashedBytes, 0, hashedPasswordWithSalt, salt.Length, hashedBytes.Length);
-
-            return Convert.ToBase64String(hashedPasswordWithSalt);
+            return RandomNumberGenerator.GetBytes(25);
         }
     }
 }

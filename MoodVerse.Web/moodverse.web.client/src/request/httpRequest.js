@@ -19,11 +19,8 @@ const requests = {
 };
 
 const Authentication = {
-    createUser: (params) => requests.post('api/authentication/create-user', params)
-};
-
-const Login = {
-    add: (params) => requests.post('api/login', params)
+    createUser: (params) => requests.post('api/authentication/create-user', params),
+    login: (params) => requests.post('api/authentication/login', params)
 };
 
 const Lookups = {
@@ -37,7 +34,6 @@ const Notes = {
 
 const httpRequest = {
     Authentication,
-    Login,
     Lookups,
     Notes
 };

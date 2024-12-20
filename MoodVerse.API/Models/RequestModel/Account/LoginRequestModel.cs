@@ -1,4 +1,6 @@
-﻿namespace MoodVerse.API.Models.RequestModel.Login
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MoodVerse.API.Models.RequestModel.Account
 {
     public class LoginRequestModel
     {
