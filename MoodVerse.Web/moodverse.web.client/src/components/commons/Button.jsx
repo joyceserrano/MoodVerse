@@ -1,4 +1,3 @@
-
 import { gsap } from "gsap";
 import { useRef, useState } from "react";
 import classes from "./Button.module.scss";
