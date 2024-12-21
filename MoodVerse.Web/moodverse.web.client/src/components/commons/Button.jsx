@@ -68,7 +68,7 @@ const Button = ({ label, onSubmit, className }) => {
 Button.propTypes = {
     label: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
-    cssClass: PropTypes.className
+    className: PropTypes.string
 };
 
 export default Button;

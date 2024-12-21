@@ -4,7 +4,9 @@ import { httpRequest } from '../../request/httpRequest';
 import { useMutation } from '@tanstack/react-query';
 import { useInput } from '../../hook/useInput';
 import { toast } from 'react-toastify';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock, faEnvelope, faIdBadge} from '@fortawesome/free-solid-svg-icons';
+import Button from '../../components/commons/Button.jsx';
 
 const CreateUserPage = () => {
     const navigate = useNavigate();
@@ -40,6 +42,7 @@ const CreateUserPage = () => {
             toast.success('Created User Successful!');
             navigate("/login");
         },
+        onError: (error) => toast.error(error?.response?.data || 'Failed to create user!')
     });
 
     const onSubmit = (e) => {
@@ -56,13 +59,14 @@ const CreateUserPage = () => {
 
     return (
         <div className={classes.create_user_page}>
-                <header>
-                    <h1>Create User</h1>
-                </header>
-            <main >
+            <header>
+                <h1>Create User</h1>
+            </header>
+            <main>
                 <form className={classes.form_container} onSubmit={onSubmit}>
                     <div className={classes.form_inputs}>
                         <div className={classes.input_container}>
+                            <FontAwesomeIcon icon={faIdBadge} className={classes.icons} />
                             <input
                                 type="text"
                                 name="firstname"
@@ -72,6 +76,7 @@ const CreateUserPage = () => {
                             />
                         </div>
                         <div className={classes.input_container}>
+                            <FontAwesomeIcon icon={faIdBadge} className={classes.icons} />
                             <input
                                 type="text"
                                 name="lastname"
@@ -81,6 +86,7 @@ const CreateUserPage = () => {
                             />
                         </div>
                         <div className={classes.input_container}>
+                            <FontAwesomeIcon icon={faUser} className={classes.icons} />
                             <input
                                 type="text"
                                 name="username"
@@ -90,6 +96,7 @@ const CreateUserPage = () => {
                             />
                         </div>
                         <div className={classes.input_container}>
+                            <FontAwesomeIcon icon={faEnvelope} className={classes.icons} />
                             <input
                                 type="email"
                                 name="email"
@@ -99,6 +106,7 @@ const CreateUserPage = () => {
                             />
                         </div>
                         <div className={classes.input_container}>
+                            <FontAwesomeIcon icon={faLock} className={classes.icons} />
                             <input
                                 type="password"
                                 name="password"
@@ -107,13 +115,13 @@ const CreateUserPage = () => {
                                 onChange={handlePasswordChange}
                             />
                         </div>
-                        <div>
-                            <button className={classes.submit_btn} type="submit">Create User</button>
+                        <div className={classes.buttons_container}>
+                            <Button className={classes.submit_btn} label="Create" />
                             <button className={classes.cancel_btn} onClick={() => navigate("/login")} type="button">Cancel</button>
                         </div>
                     </div>    
                 </form>
-                </main>
+            </main>
         </div>
     );
 };

@@ -30,11 +30,15 @@
         outline: none;
         border: none;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 18px; 
         padding: 20px;
         height: 250px;
         width: 800px;
         font-weight: 500;
+
+        &.title {
+            height: 50px;
+        }
     }
 
     .cursor {

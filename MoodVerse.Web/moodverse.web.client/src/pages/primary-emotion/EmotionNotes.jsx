@@ -29,7 +29,8 @@ const EmotionNotes = ({ name, onChange }) => {
                 </span>
                 <span className={classes.cursor}> </span>
             </h1>
-            <textarea onChange={onChange}></textarea>
+            <textarea name="title" className={classes.title} onChange={onChange}></textarea>
+            <textarea name="text" className={classes.text} onChange={onChange}></textarea>
         </div>
     );
 };
