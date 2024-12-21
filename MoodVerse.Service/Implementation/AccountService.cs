@@ -28,6 +28,17 @@ namespace MoodVerse.Service.Implementation
             return Mapper.Map<AccountDto>(account);
         }
 
+        public async Task<AccountDto?> GetByUserIdAsync(Guid userId)
+        {
+            var account = await AccountRepository.GetByUserIdAsync(userId);
+
+            if (account == null)
+                return null;
+
+            return Mapper.Map<AccountDto>(account);
+        }
+
+
         public async Task InsertAsync(InsertAccountDto accountDto)
         {
             var salt = GenerateSalt();

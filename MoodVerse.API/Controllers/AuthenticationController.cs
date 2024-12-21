@@ -6,6 +6,7 @@ using MoodVerse.Service.Dto.Account;
 using MoodVerse.Service.Dto.User;
 using MoodVerse.Service.Interface;
 using MoodVerse.Utility.JWT.Model;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MoodVerse.API.Controllers
 {
@@ -35,7 +36,7 @@ namespace MoodVerse.API.Controllers
 
             var account = await AccountService.GetByUsernameAsync(loginRequestModel.Username);
 
-            if (account == null)
+            if (account == null) 
                 return NotFound("Username not found");
 
             var isPasswordValid = AccountService.VerifyPassword(loginRequestModel.Password, account.Hash, account.Salt);
@@ -43,12 +44,32 @@ namespace MoodVerse.API.Controllers
             if (!isPasswordValid) 
                 return BadRequest("Password Wrong");
 
-            var tokens = AuthenticationService.GenerateTokens(account);
+            var tokens = await AuthenticationService.GenerateTokensAsync(account);
 
-            return Ok(tokens);
+            Response.SetSecureCookie("refreshToken", tokens.RefreshToken);
+
+            return Ok(new { tokens.AccessToken });
+        }
+        
+        [HttpGet("self")]
+        [Authorize]
+        public async Task<IActionResult> GetUserAsync()
+        {
+            var sid = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sid)?.Value;
+
+            if (sid == null)
+                return Unauthorized("SID claim is missing.");
+
+            var userId = Guid.Parse(sid);
+            var userDto = await UserService.GetByIdAsync(userId);
+
+            if (userDto == null)
+                return NotFound("User not found.");
+
+            return Ok(userDto);
         }
 
-        [HttpPost("create-user")]
+        [HttpPost("user")] 
         [AllowAnonymous]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestModel requestModel)
         {
@@ -76,11 +97,35 @@ namespace MoodVerse.API.Controllers
             return Ok(user.Id);
         }
 
-        [HttpGet]
-        [Authorize]
-        public IActionResult Test()
+        [HttpPost("refresh")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshTokenAsync(Guid userId)
         {
-            return Ok("Test Succeeded");
+            var account = await AccountService.GetByUserIdAsync(userId);
+
+            if (account == null)
+                return NotFound("Account not found");
+
+            var refreshTokenCookie = Request.Cookies["refreshToken"];
+            Response.Cookies.Delete("refreshToken"); 
+
+            if (string.IsNullOrEmpty(refreshTokenCookie))
+            {
+                return Unauthorized("Refresh token cookie is missing.");
+            }
+
+            var refreshToken = await AuthenticationService.GetRefreshTokenByAccountIdAsync(account.Id);
+            
+            if (refreshToken == null || refreshTokenCookie != refreshToken.Token || refreshToken.Expiration < DateTime.UtcNow)
+            {
+                return Unauthorized("Invalid or expired refresh token.");
+            }
+
+            var tokens = await AuthenticationService.GenerateTokensAsync(account);
+
+            Response.SetSecureCookie("refreshToken", tokens.RefreshToken);
+
+            return Ok(new { tokens.AccessToken });
         }
     }
 }

@@ -13,6 +13,7 @@ using MoodVerse.Utility.Emails;
 using MoodVerse.Utility.Emails.Interface;
 using MoodVerse.Utility.Emails.Model;
 using MoodVerse.Utility.JWT.Model;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -69,11 +70,14 @@ builder.Services.AddSwaggerGen(c =>
             });
 });
     
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    
 })
     .AddJwtBearer(options =>
     {
@@ -124,6 +128,8 @@ builder.Services.AddScoped<ILookupRepository, LookupRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -131,6 +137,7 @@ builder.Services.AddScoped<IArtistService, ArtistService>();
 builder.Services.AddScoped<ILookupService, LookupService>();
 builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddScoped<IUserService, UserService>();
+
 
 builder.Services.AddScoped<IEmailDispatcher, EmailDispatcher>();
 
@@ -150,6 +157,8 @@ app.UseHttpsRedirection();
 //app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<TokenValidationMiddleware>();
 
 app.MapControllers();
 

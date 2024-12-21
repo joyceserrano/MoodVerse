@@ -4,7 +4,7 @@ import PrimaryEmotionPage from '../src/pages/primary-emotion/PrimaryEmotionPage'
 import RootLayoutPage from '../src/root/RootLayoutPage';
 import NotePage from '../src/pages/note/NotePage';
 import { QueryClientProvider } from '@tanstack/react-query';
-import queryClient from "./../src/utility/query-client"
+import { queryClient } from "./../src/utility/query-client"
 import CreateUserPage from './pages/authentication/CreateUser';
 import { ToastContainer } from 'react-toastify';
 import { Authentication } from './utility/authentication';
@@ -17,11 +17,13 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <PrimaryEmotionPage />
+                element: <PrimaryEmotionPage />,
+                loader: Authentication.checkAuth
             },
             {
                 path: 'notes', 
-                element: <NotePage />
+                element: <NotePage />,
+                loader: Authentication.checkAuth
             }
         ]
     }, 

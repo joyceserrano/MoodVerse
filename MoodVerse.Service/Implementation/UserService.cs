@@ -30,5 +30,10 @@ namespace MoodVerse.Service.Implementation
 
             return user;
         }
+
+        public async Task<User?> GetByIdAsync(Guid id)
+        {
+            return await UserRepository.GetByIdAsync(id);
+        }
     }
 }

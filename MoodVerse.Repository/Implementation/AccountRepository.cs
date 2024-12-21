@@ -10,7 +10,17 @@ namespace MoodVerse.Repository.Implementation
         {
             return await Context.Account.SingleOrDefaultAsync(a => a.Username == username);
         }
-        
+
+        public async Task<Account?> GetByUserIdAsync(Guid userId)
+        {
+            return await Context.Account.SingleOrDefaultAsync(a => a.UserId == userId && !a.Deleted);
+        }
+
+        public async Task<Account?> GetByIdAsync(Guid id)
+        {
+            return await Context.Account.SingleOrDefaultAsync(a => a.Id == id && !a.Deleted);
+        }
+
         public async Task InsertAsync(Account account)
         {
             await Context.AddAsync(account);

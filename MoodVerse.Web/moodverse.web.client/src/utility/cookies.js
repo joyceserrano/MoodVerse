@@ -40,7 +40,7 @@ class Cookies {
         const cookies = document.cookie.split(';');
         for (let cookie of cookies) {
             const [cookieKey] = cookie.split('=').map(part => part.trim());
-            this.set(decodeURIComponent(cookieKey), '', { expires: new Date(0) });
+            this.set(decodeURIComponent(cookieKey), '', { expires: new Date(0), secure: true });
         }
     }
 }

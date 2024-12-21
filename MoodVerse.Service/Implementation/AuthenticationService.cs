@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
+using MoodVerse.Data.Entity;
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto.Account;
 using MoodVerse.Service.Dto.Authentication;
@@ -15,24 +17,32 @@ namespace MoodVerse.Service.Implementation
     public class AuthenticationService : IAuthenticationService
     {
         private IOptions<Jwt> JwtInfo { get; }
+        private IRefreshTokenRepository RefreshTokenRepository { get; }
 
         public AuthenticationService(
             IOptions<Jwt> jwtInfo,
-            IAccountRepository accountRepository)
+            IAccountRepository accountRepository,
+            IRefreshTokenRepository refreshTokenRepository)
         {
             JwtInfo = jwtInfo;
+            RefreshTokenRepository = refreshTokenRepository;
         }
 
-        public TokenDto GenerateTokens(AccountDto account)
+        public async Task<TokenDto> GenerateTokensAsync(AccountDto account)
         {
             var accessToken = GenerateJwtToken(account);
-            var refreshToken = GenerateRefreshToken();
+            var refreshToken = await InsertRefreshToken(account);
 
             return new TokenDto
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
+        }
+
+        public async Task<RefreshToken?> GetRefreshTokenByAccountIdAsync(Guid accountId)
+        {
+            return await RefreshTokenRepository.GetByAccountIdAsync(accountId);
         }
 
         private string GenerateJwtToken(AccountDto account)
@@ -51,19 +61,37 @@ namespace MoodVerse.Service.Implementation
             var token = new JwtSecurityToken(
                 issuer: JwtInfo.Value.Issuer,
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.UtcNow.AddMinutes(2),
                 signingCredentials: credentials
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        private async Task<string> InsertRefreshToken(AccountDto accountDto)
+        {
+            var accountId = accountDto.Id;
+
+            var refreshToken = new RefreshToken
+            {
+                Id = Guid.NewGuid(),
+                Token = GenerateRefreshToken(),
+                AccountId = accountId,
+                Expiration = DateTime.UtcNow.AddDays(1)
+            };
+
+            RefreshTokenRepository.DeleteAllByAccountId(accountId);
+            await RefreshTokenRepository.SaveChanges();
+
+            await RefreshTokenRepository.InsertAsync(refreshToken);
+            await RefreshTokenRepository.SaveChanges();
+
+            return refreshToken.Token;
+        }
+
         private static string GenerateRefreshToken()
         {
-            using var rng = RandomNumberGenerator.Create();
-
-            byte[] tokenBuffer = new byte[25];
-            rng.GetBytes(tokenBuffer);
-            return Convert.ToBase64String(tokenBuffer);
+            return Convert.ToBase64String(RandomNumberGenerator.GetBytes(25));
         }
     }
 }

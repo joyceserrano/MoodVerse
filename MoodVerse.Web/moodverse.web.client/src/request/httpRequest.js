@@ -19,8 +19,10 @@ const requests = {
 };
 
 const Authentication = {
-    createUser: (params) => requests.post('api/authentication/create-user', params),
-    login: (params) => requests.post('api/authentication/login', params)
+    createUser: (params) => requests.post('api/authentication/user', params),
+    login: (params) => requests.post('api/authentication/login', params),
+    refresh: (id) => requests.post(`api/authentication/refresh/${id}`),
+    getSelf: () => requests.get('api/authentication/self')
 };
 
 const Lookups = {
