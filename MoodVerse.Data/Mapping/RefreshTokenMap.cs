@@ -12,10 +12,10 @@ namespace MoodVerse.Data.Mapping
             entityBuilder.HasKey(r => r.Id);
             entityBuilder.Property(r => r.Token).IsRequired();
             entityBuilder.Property(r => r.Expiration).IsRequired();
-            entityBuilder.Property(r => r.UserId).IsRequired();
+            entityBuilder.Property(r => r.AccountId).IsRequired();
 
             entityBuilder
-                .HasOne(e => e.User)
+                .HasOne(r => r.Account)
                 .WithMany();
         }
     }
