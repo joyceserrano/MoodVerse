@@ -27,17 +27,17 @@ const LoginPage = () => {
     const { mutate } = useMutation({
         mutationFn: (credentials) => httpRequest.Authentication.login(credentials),
         onSuccess: (response) => {
-            cookies.set('token', response.accessToken);
+            cookies.set('accessToken', response.accessToken);
+            cookies.set('refreshToken', response.refreshToken);
+
             gsap.to(`.${classes.login_container}`, {
                 opacity: 0,
                 duration: 0.5,
                 ease: "power2.inOut",
-                onComplete: () => navigate("/emotions")
+                onComplete: () => navigate("/")
             });
         },
-        onError: (error) => {
-            toast.error(error?.response?.data?.message || 'An error occurred during login');
-        }
+        onError: (error) => toast.error(error?.response?.data || 'An error occurred during login')
     });
 
     const onSubmit = (e) => {

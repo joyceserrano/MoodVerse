@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MoodVerse.Repository.Interface;
 using MoodVerse.Service.Dto.Account;

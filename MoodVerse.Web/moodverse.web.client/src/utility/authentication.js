@@ -3,10 +3,10 @@ import cookies from './cookies';
 
 export class Authentication {
     static checkAuth() {
-        const token = cookies.get('token');
-        if (!token) {
-                return redirect('/login');
-        }
+        const token = cookies.get('accessToken');
+        if (!token) 
+            return redirect('/login');
+        
         return null;
     }
 }

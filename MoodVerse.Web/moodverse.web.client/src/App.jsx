@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         loader: Authentication.checkAuth,
         children: [
             {
-                path: 'emotions',
+                index: true,
                 element: <PrimaryEmotionPage />
             },
             {
