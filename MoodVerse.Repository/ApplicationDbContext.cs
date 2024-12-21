@@ -18,6 +18,7 @@ namespace MoodVerse.Repository
         public DbSet<Note> Note { get; set; }
         public DbSet<PrimaryEmotionType> PrimaryEmotionType { get; set; }
         public DbSet<Quote> Quote { get; set; }
+        public DbSet<RefreshToken> RefreshToken { get; set; }
         public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +31,7 @@ namespace MoodVerse.Repository
             new PrimaryEmotionTypeMap(modelBuilder);
             new QuoteMap(modelBuilder);
             new UserMap(modelBuilder);
+            new RefreshTokenMap(modelBuilder);
         }
     }
 }
