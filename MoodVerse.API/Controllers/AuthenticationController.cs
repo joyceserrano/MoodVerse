@@ -37,12 +37,12 @@ namespace MoodVerse.API.Controllers
             var account = await AccountService.GetByUsernameAsync(loginRequestModel.Username);
 
             if (account == null) 
-                return NotFound("Username and Password is incorrect");
+                return BadRequest("Incorrect username or password");
 
             var isPasswordValid = AccountService.VerifyPassword(loginRequestModel.Password, account.Hash, account.Salt);
 
-            if (!isPasswordValid) 
-                return BadRequest("Username and Password is incorrect");
+            if (!isPasswordValid)
+                return BadRequest("Incorrect username or password");
 
             var tokens = await AuthenticationService.GenerateTokensAsync(account);
 
