@@ -4,7 +4,6 @@ import Settings from "./Settings";
 import { useQuery } from '@tanstack/react-query';
 import { httpRequest } from '../request/httpRequest';
 import { toast } from "react-toastify";
-import { getQueryKeyValue } from '../utility/query-client';
 import cookies from '../utility/cookies';
 
 const RootLayoutPage = () => {
@@ -12,18 +11,16 @@ const RootLayoutPage = () => {
         queryKey: ["self"],
         queryFn: async () => {
             const response = await httpRequest.Authentication.getSelf();
-            if (response && response.id) {
-                cookies.set('userId', response.id);
-            }
-            return response ?? null;
+            
+            if (response?.data?.id) 
+                cookies.set('userId', response.data.id);
+            
+            return response || null;
         },  
         onError: (error) => toast.error(error?.response?.data || 'An error occurred during login'),
-        staleTime: Infinity,
-        cacheTime: Infinity
+        staleTime: 24 * 60 * 60 * 1000, // 24 hours
+        cacheTime: 24 * 60 * 60 * 1000 // 24 hours
     });
-
-    const user = getQueryKeyValue('self');
-    console.log(user);
 
     return (
         <div className={classes.root_layout}>

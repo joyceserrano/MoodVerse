@@ -8,20 +8,18 @@ const createQueryParams = (params) => {
     return filteredParams.length ? `?${filteredParams.join('&')}` : '';
 };
 
-const responseBody = (response) => response.data;
-
 const requests = {
-    get: (url, config) => axiosConnector.get(url, config).then(responseBody),
-    post: (url, body, config) => axiosConnector.post(url, body, config).then(responseBody),
-    put: (url, body, config) => axiosConnector.put(url, body, config).then(responseBody),
-    patch: (url, body) => axiosConnector.patch(url, body).then(responseBody),
-    delete: (url, body) => axiosConnector.delete(url, { data: body }).then(responseBody),
+    get: (url, config) => axiosConnector.get(url, config).then((response) => response),
+    post: (url, body, config) => axiosConnector.post(url, body, config).then((response) => response),
+    put: (url, body, config) => axiosConnector.put(url, body, config).then((response) => response),
+    patch: (url, body) => axiosConnector.patch(url, body).then((response) => response),
+    delete: (url, body) => axiosConnector.delete(url, { data: body }).then((response) => response),
 };
 
 const Authentication = {
     createUser: (params) => requests.post('api/authentication/user', params),
     login: (params) => requests.post('api/authentication/login', params),
-    refresh: (id) => requests.post(`api/authentication/refresh/${id}`),
+    refresh: (userId) => requests.post(`api/authentication/refresh/${userId}`),
     getSelf: () => requests.get('api/authentication/self')
 };
 

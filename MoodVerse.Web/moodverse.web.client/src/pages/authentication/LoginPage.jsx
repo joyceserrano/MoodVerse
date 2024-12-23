@@ -27,7 +27,7 @@ const LoginPage = () => {
     const { mutate } = useMutation({
         mutationFn: (credentials) => httpRequest.Authentication.login(credentials),
         onSuccess: (response) => {
-            cookies.set('accessToken', response.accessToken);
+            cookies.set('accessToken', response.data.accessToken);
 
             gsap.to(`.${classes.login_container}`, {
                 opacity: 0,

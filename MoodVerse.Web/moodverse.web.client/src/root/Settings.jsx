@@ -4,6 +4,7 @@ import { useState } from 'react';
 import classes from "./Settings.module.scss";
 import cookies from '../utility/cookies';
 import { useNavigate } from 'react-router-dom';
+import { queryClient } from '../utility/query-client';
 
 const Settings = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -15,6 +16,8 @@ const Settings = () => {
 
     const handleLogout = () => {
         cookies.deleteAll();
+        queryClient.clear();
+        queryClient.invalidateQueries();
         navigate("/login");
     };
 

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import cookies from '../utility/cookies';
-import { Authentication } from '../utility/authentication';
-import { queryClient, getQueryKeyValue } from '../utility/query-client';
+import Authentication from '../utility/authentication';
 
 const axiosConnector = axios.create({
     baseUrl: 'https://localhost:44372/',
@@ -36,12 +35,8 @@ axiosConnector.interceptors.response.use(
 );
 
 const handleUnauthorize = async () => {
-    console.log('Unauthorized');
-
-    const user = getQueryKeyValue('self');
-
-    var response = await Authentication.refreshAccessToken(user.id);
-    cookies.set('accessToken', response.accessToken);
+    const userId = cookies.get('userId');
+    await Authentication.refreshAccessToken(userId);
 };
 
 export default axiosConnector;

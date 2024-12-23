@@ -18,7 +18,10 @@ const PrimaryEmotionPage = () => {
 
     const { data: emotions } = useQuery({
         queryKey: ['primary-emotions'],
-        queryFn: httpRequest.Lookups.getPrimaryEmotions,
+        queryFn: async () => {
+            const response = await httpRequest.Lookups.getPrimaryEmotions();
+            return response.data; 
+        },
     });
 
     const { mutate } = useMutation({

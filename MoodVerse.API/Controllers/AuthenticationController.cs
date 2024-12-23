@@ -97,17 +97,22 @@ namespace MoodVerse.API.Controllers
             return Ok(user.Id);
         }
 
-        [HttpPost("refresh")]
+        [HttpPost("refresh/{userId}")]
         [AllowAnonymous]
         public async Task<IActionResult> RefreshTokenAsync(Guid userId)
         {
+            
+            var sid = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sid)?.Value;
+
+            if (userId != Guid.Parse(sid))
+                return Unauthorized("User is invalid");
+
             var account = await AccountService.GetByUserIdAsync(userId);
 
             if (account == null)
                 return NotFound("Account not found");
 
             var refreshTokenCookie = Request.Cookies["refreshToken"];
-            Response.Cookies.Delete("refreshToken"); 
 
             if (string.IsNullOrEmpty(refreshTokenCookie))
             {
@@ -123,6 +128,7 @@ namespace MoodVerse.API.Controllers
 
             var tokens = await AuthenticationService.GenerateTokensAsync(account);
 
+            Response.Cookies.Delete("refreshToken");
             Response.SetSecureCookie("refreshToken", tokens.RefreshToken);
 
             return Ok(new { tokens.AccessToken });
