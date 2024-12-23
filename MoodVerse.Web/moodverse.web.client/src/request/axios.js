@@ -35,8 +35,21 @@ axiosConnector.interceptors.response.use(
 );
 
 const handleUnauthorize = async () => {
-    const userId = cookies.get('userId');
-    await Authentication.refreshAccessToken(userId);
+    try {
+        console.log("handleUnauthorize");
+        const userId = cookies.get('userId');
+
+        const response = await Authentication.refreshAccessToken(userId);
+
+        if (!response.ok) {
+            console.error("Failed to refresh access token. Redirecting to login.");
+            Authentication.logout();
+        }
+    } catch (error) {
+        console.error("Error in handleUnauthorize:", error);
+        Authentication.logout();
+    }
 };
+
 
 export default axiosConnector;

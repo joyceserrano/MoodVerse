@@ -3,10 +3,11 @@ import { TextPlugin } from "gsap/TextPlugin";
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from "react";
 import classes from "./EmotionNotes.module.scss";
+import moment from "moment"
 
 gsap.registerPlugin(TextPlugin);
 
-const EmotionNotes = ({ name, onChange }) => {
+const EmotionNotes = ({ name, onTitleChange, onNoteChange }) => {
     const textRef = useRef(null); 
 
     useEffect(() => {
@@ -29,8 +30,9 @@ const EmotionNotes = ({ name, onChange }) => {
                 </span>
                 <span className={classes.cursor}> </span>
             </h1>
-            <textarea name="title" className={classes.title} onChange={onChange}></textarea>
-            <textarea name="text" className={classes.text} onChange={onChange}></textarea>
+            <h3 className={classes.today}>{moment().format('MMMM D, YYYY')}</h3>
+            <input name="title" placeholder="<title>" className={classes.title} onChange={onTitleChange}></input>
+            <textarea name="text" placeholder="I feel this today ..." className={classes.text} onChange={onNoteChange}></textarea>
         </div>
     );
 };
@@ -38,7 +40,8 @@ const EmotionNotes = ({ name, onChange }) => {
 EmotionNotes.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.string,
-    onChange: PropTypes.func
+    onTitleChange: PropTypes.func,
+    onNoteChange: PropTypes.func
 };
 
 export default EmotionNotes;

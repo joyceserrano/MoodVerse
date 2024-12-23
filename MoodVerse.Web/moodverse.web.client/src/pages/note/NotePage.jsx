@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Flair from './Flair';
 import { httpRequest } from '../../request/httpRequest';
 import moment from 'moment';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 
 const fetchPosts = async ({ pageParam = 0 }) => {
     const response = await httpRequest.Notes.filter({ skip: pageParam * 5, take: 5 });
@@ -66,9 +68,9 @@ const NotePage = () => {
         <div className={classes.note_page}>
             {data?.pages.map((page, pageIndex) => (
                 <Fragment key={pageIndex}>
-                    {page.notes.map((note) => (
+                    {page.notes.data.map((note) => (
                         <div key={note.id} className={classes.card} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                            <h3>{note.title}</h3>
+                            <h3 className={classes.title}>{note.title}</h3>
                             <div className={classes.calendar}>
                                 <div className={classes.date}>{moment(note.createdOn).format('DD')}</div>
                                 <div className={classes.month}>{moment(note.createdOn).format('MMM')}</div>
@@ -76,7 +78,7 @@ const NotePage = () => {
                             </div>
                             <p>{note.text}</p>
                             <div className={classes.buttons}>
-                                <FontAwesomeIcon className={classes.delete} icon="trash" />
+                                <FontAwesomeIcon className={classes.delete} icon={faTrash} />
                             </div>
                             <Flair className={classes.flair} />
                         </div>

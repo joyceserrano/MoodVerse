@@ -29,6 +29,15 @@
             background: #051937;
         }
 
+        .title {
+            font-size: 23px;
+            background-image: linear-gradient(1150deg, #177af6, #15adce, #4ce186, #f7ff15);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
         .calendar {
             border: 1px solid white;
             padding: 10px;

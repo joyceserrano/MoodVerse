@@ -15,7 +15,8 @@
         padding: 0;
 
         .gradient_text {
-            background: linear-gradient(90deg, #ff7e5f, #feb47b); 
+            background: linear-gradient(30deg, #177af6, #15adce, #4ce186, #f7ff15);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -25,12 +26,31 @@
         font-size: 50px;
     }
 
+    .today {
+        margin: 2px 0px;
+        text-align: left;
+    }
+
+    .title {
+        font-family: $font-primary;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        font-size: 25px;
+        padding: 10px 20px;
+        height: 50px;
+        width: 800px;
+        font-weight: 600;
+        margin: 5px 0px;
+        font-weight: lighter;
+    }
+
     textarea {
         font-family: $font-primary;
         outline: none;
         border: none;
         border-radius: 10px;
-        font-size: 18px; 
+        font-size: 18px;
         padding: 20px;
         height: 250px;
         width: 800px;

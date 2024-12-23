@@ -32,6 +32,11 @@ const PrimaryEmotionPage = () => {
     });
 
     const {
+        value: titleValue,
+        onChange: titleChangeValue,
+    } = useInput();
+
+    const {
         value: noteValue,
         onChange: onNoteChange,
     } = useInput();
@@ -73,6 +78,7 @@ const PrimaryEmotionPage = () => {
 
         mutate({
             primaryEmotionTypeId: emotions[selectedEmotionIndex].id,
+            title: titleValue,
             text: noteValue
         });
     }
@@ -90,7 +96,7 @@ const PrimaryEmotionPage = () => {
                     ))}
             </div>
             <form onSubmit={handleSubmit}>
-                {selectedEmotionIndex != null && <EmotionNotes name={emotions[selectedEmotionIndex].name} onChange={onNoteChange} />}
+                {selectedEmotionIndex != null && <EmotionNotes name={emotions[selectedEmotionIndex].name} onTitleChange={titleChangeValue}  onNoteChange={onNoteChange} />}
                 {selectedEmotionIndex != null && <div className={classes.submit_container} >
                     <button className={classes.submit_btn} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <FontAwesomeIcon ref={iconRef} icon={faArrowRight} />

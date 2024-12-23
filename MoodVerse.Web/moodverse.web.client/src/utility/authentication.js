@@ -1,6 +1,7 @@
 import { redirect } from 'react-router-dom';
 import cookies from './cookies';
 import { httpRequest } from '../request/httpRequest';
+import { queryClient } from '../utility/query-client';
 
 class Authentication {
     static checkAuth() {
@@ -15,13 +16,19 @@ class Authentication {
     async refreshAccessToken(userId) {
         const response = await httpRequest.Authentication.refresh(userId);
 
-        if (response.status === 200) {
+        if (response.status == 200) {
             cookies.set('accessToken', response.data.accessToken);
-            console.log('access token refreshed');
         } else {
             redirect('/login');
         }
     }
+
+    logout = () => {
+        cookies.deleteAll();
+        queryClient.clear();
+        queryClient.invalidateQueries();
+        window.location.href = "/login";
+    };
 }
 
 const authenticationInstance = new Authentication();
