@@ -61,7 +61,7 @@ namespace MoodVerse.Service.Implementation
             var token = new JwtSecurityToken(
                 issuer: JwtInfo.Value.Issuer,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(2),
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
             );
 
