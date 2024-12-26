@@ -1,99 +1,100 @@
 .create_user_page {
-  background: linear-gradient(
-    109.6deg,
-    rgb(36, 45, 57) 11.2%,
-    rgb(16, 37, 60) 51.2%,
-    rgb(0, 0, 0) 98.6%
-  );
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: white;
-
-  header {
-    h1 {
-      font-size: 40px;
-      background: linear-gradient(30deg, #177af6, #15adce, #4ce186, #f7ff15);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-    }
-  }
-
-  .form_container {
-    width: 400px;
-    height: 400px;
-    background: rgb(0 0 0 / 20%);
-    border-radius: 15px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient( 109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6% );
+    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: white;
-    text-align: center;
-    font-size: 14px;
+    justify-content: center;
     flex-direction: column;
+    color: white;
 
-    .form_inputs {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-
-      .input_container {
-        border-radius: 5px;
-        background: #eff2f6;
+    .create_user_container {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        position: relative;
-        padding: 10px;
 
-        .icons {
-          padding: 5px;
-          color: #828a99;
+        header {
+            h1 {
+                font-size: 40px;
+                background: linear-gradient(30deg, #177af6, #15adce, #4ce186, #f7ff15);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: 900;
+            }
         }
 
-        input {
-          font-size: 12px;
-          width: 300px;
-          padding: 5px;
-          outline: none;
-          border: none;
-          background: transparent;
+        .form_container {
+            width: 400px;
+            height: 400px;
+            background: rgb(0 0 0 / 20%);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            flex-direction: column;
+
+            .form_inputs {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .input_container {
+                    border-radius: 5px;
+                    background: #eff2f6;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    padding: 10px;
+
+                    .icons {
+                        padding: 5px;
+                        color: #828a99;
+                    }
+
+                    input {
+                        font-size: 12px;
+                        width: 300px;
+                        padding: 5px;
+                        outline: none;
+                        border: none;
+                        background: transparent;
+                    }
+                }
+
+                .buttons_container {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+
+                    .submit_btn,
+                    .cancel_btn {
+                        outline: none;
+                        border-radius: 5px;
+                        height: 40px;
+                        color: white;
+                        flex: 1;
+                        text-align: center;
+                        font-size: 14px;
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .cancel_btn {
+                        background: rgb(0 0 0 / 20%);
+                    }
+                }
+            }
         }
-      }
-
-      .buttons_container {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-
-        .submit_btn,
-        .cancel_btn {
-          outline: none;
-          border-radius: 5px;
-          height: 40px;
-          color: white;
-          flex: 1;
-          text-align: center;
-          font-size: 14px;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-
-        .cancel_btn {
-          background: rgb(0 0 0 / 20%);
-        }
-      }
     }
-  }
 }

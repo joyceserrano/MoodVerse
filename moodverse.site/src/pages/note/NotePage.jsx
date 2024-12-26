@@ -5,15 +5,15 @@ import classes from './NotePage.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Flair from './Flair';
 import { httpRequest } from '../../request/httpRequest';
-import moment from 'moment';
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import cookies from '../../utility/cookies';
+import moment from 'moment-timezone';
 
 const fetchPosts = async ({ pageParam = 0 }) => {
     const userId = cookies.get('userId');
 
     const pageSize = 5;
-    const response = await httpRequest.Notes.filter({ userId: userId, skip: pageParam + pageSize, take: pageSize });
+    const response = await httpRequest.Notes.filter({ userId: userId, skip: pageParam, take: pageSize });
     const notes = response.data.notes;
     const total = response.data.total;
 
@@ -31,7 +31,6 @@ const NotePage = () => {
         data,
         fetchNextPage,
         hasNextPage,
-        status,
     } = useInfiniteQuery({
         queryKey: ['notes'],
         queryFn: fetchPosts,
@@ -88,9 +87,9 @@ const NotePage = () => {
                         <div key={note.id} className={classes.card} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                             <h3 className={classes.title}>{note.title}</h3>
                             <div className={classes.calendar}>
-                                <div className={classes.date}>{moment(note.createdOn).format('DD')}</div>
-                                <div className={classes.month}>{moment(note.createdOn).format('MMM')}</div>
-                                <div className={classes.year}>{moment(note.createdOn).format('YYYY')}</div>
+                                <div className={classes.date}>{moment.utc(note.createdOn).tz('Asia/Manila').format('DD')}</div>
+                                <div className={classes.month}>{moment.utc(note.createdOn).tz('Asia/Manila').format('MMM')}</div>
+                                <div className={classes.year}>{moment.utc(note.createdOn).tz('Asia/Manila').format('YYYY')}</div>
                             </div>
                             <p>{note.text}</p>
                             <div className={classes.buttons}>

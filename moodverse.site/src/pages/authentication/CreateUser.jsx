@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faEnvelope, faIdBadge} from '@fortawesome/free-solid-svg-icons';
 import Button from '../../components/commons/Button.jsx';
+import { gsap } from 'gsap';
 
 const CreateUserPage = () => {
     const navigate = useNavigate();
@@ -59,10 +60,10 @@ const CreateUserPage = () => {
 
     return (
         <div className={classes.create_user_page}>
+            <main className={classes.create_user_container}>
             <header>
                 <h1>Create User</h1>
             </header>
-            <main>
                 <form className={classes.form_container} onSubmit={onSubmit}>
                     <div className={classes.form_inputs}>
                         <div className={classes.input_container}>
@@ -117,7 +118,15 @@ const CreateUserPage = () => {
                         </div>
                         <div className={classes.buttons_container}>
                             <Button className={classes.submit_btn} label="Create" />
-                            <button className={classes.cancel_btn} onClick={() => navigate("/login")} type="button">Cancel</button>
+
+                            <button className={classes.cancel_btn} onClick={() => {
+                                gsap.to(`.${classes.create_user_container}`, {
+                                    opacity: 0,
+                                    duration: 0.5,
+                                    ease: "power2.inOut",
+                                    onComplete: () => navigate("/login")
+                                });
+                            }} type="button">Cancel</button>
                         </div>
                     </div>    
                 </form>
