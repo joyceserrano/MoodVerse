@@ -1,0 +1,80 @@
+.login_page {
+    background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+        width: 300px;
+        padding: 30px;
+    }
+
+    .login_container {
+        width: 400px;
+        height: 400px;
+        background: rgb(0 0 0 / 20%);
+        border-radius: 15px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        flex-direction: column;
+
+        .login_inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 90%;
+
+            .input_container {
+                border-radius: 5px;
+                background: #eff2f6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 10px;
+
+                .icons {
+                    padding: 5px;
+                    color: #828a99;
+                }
+
+                input {
+                    font-size: 12px;
+                    width: 300px;
+                    padding: 5px;
+                    outline: none;
+                    border: none;
+                    background: transparent;
+                }
+            }
+        }
+
+        .buttons_container {
+            width: 90%;
+            margin: 10px;
+
+            .button {
+                background: #060e17;
+
+                .flair {
+                    background: linear-gradient(90deg, rgba(32,91,235,1) 0%, rgba(27,190,217,1) 51%, rgba(56,201,23,1) 100%);
+                }
+            }
+        }
+
+        .create_user_link{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Roboto&display=swap');
+
+html, body {
+    font-family: "Parkinsans", serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 100%;
+    margin: 0;
+}
+
+#root {
+    font-family: "Parkinsans", serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 100%;
+}
+
+.Toastify__toast {
+    background-color: #060e17;
+    color: white;
+}
+
+.Toastify__toast-body {
+    color: #fff; 
+}
+
+.Toastify__progress-bar {
+    background: linear-gradient(90deg, rgba(32,91,235,1) 0%, rgba(27,190,217,1) 51%, rgba(56,201,23,1) 100%);
+}
+
+#root input {
+    font-family: "Parkinsans", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#root button {
+    font-family: "Parkinsans", serif;
+    font-weight: 400;
+    font-style: normal;
+}
