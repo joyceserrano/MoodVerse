@@ -28,7 +28,7 @@ namespace MoodVerse.Service.Implementation
             await NoteRepository.SaveChanges();
         }
 
-        public async Task<IEnumerable<Note>> GetAllAsync(Guid userId, int? skip = null, int? take = null)
+        public async Task<(IEnumerable<Note>, int total)> GetAllAsync(Guid userId, int? skip = null, int? take = null)
         {
             return await NoteRepository.GetAllAsync(userId, skip, take);
         }

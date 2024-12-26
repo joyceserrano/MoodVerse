@@ -5,7 +5,7 @@ namespace MoodVerse.Service.Interface
 {
     public interface INoteService
     {
-        Task<IEnumerable<Note>> GetAllAsync(Guid userId, int? skip, int? take);
+        Task<(IEnumerable<Note>, int total)> GetAllAsync(Guid userId, int? skip = null, int? take = null);
         Task InsertAsync(NoteDto note);
     }
 }

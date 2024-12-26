@@ -15,18 +15,16 @@ namespace MoodVerse.Repository.Implementation
         {
             await Context.AddAsync(note);
         }
-        public async Task<IEnumerable<Note>> GetAllAsync(Guid userId, int? skip, int? take)
+        public async Task<(IEnumerable<Note>, int total)> GetAllAsync(Guid userId, int? skip, int? take)
         {
-            var query = Context.Note
-                .OrderByDescending(n => n.CreatedOn).AsQueryable();
+            var query = Context.Note.Where(n => n.CreatorId == userId)
+                .OrderByDescending(n => n.CreatedOn)
+                .Skip(skip.Value)
+                .Take(take.Value);
 
-            if (skip.HasValue)
-                query = query.Skip(skip.Value);
+            int total = await query.CountAsync();
 
-            if (take.HasValue)
-                query = query.Take(take.Value);
-
-            return await query.ToListAsync();
+            return (await query.ToListAsync(), total);
         }
     }
 }

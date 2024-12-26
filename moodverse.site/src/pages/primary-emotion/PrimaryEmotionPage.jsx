@@ -24,7 +24,6 @@ const PrimaryEmotionPage = () => {
         },
     });
 
-    console.log(emotions);
     const { mutate } = useMutation({
         mutationFn: httpRequest.Notes.add,
         onSuccess: () => {
