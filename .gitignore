@@ -363,3 +363,7 @@ MigrationBackup/
 /MoodVerse.API/appsettings.Development.json
 /MoodVerse.API/appsettings.json
 /MoodVerse.Web/moodverse.web.client/src/variables.json
+/MoodVerse.Site/src/constants.js
+/MoodVerse.Site/src/constants.js
+/MoodVerse.API/appsettings.Staging.json
+/MoodVerse.API/Properties/launchSettings.json

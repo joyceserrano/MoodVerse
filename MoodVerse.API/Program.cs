@@ -20,21 +20,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
 
-
-//builder.Services.AddCors(options =>
-//         options.AddDefaultPolicy(
-//             b =>
-//             {
-//                 b
-//                 .AllowAnyMethod()
-//                 .AllowAnyHeader()
-//                 .AllowCredentials()
-//                 .WithExposedHeaders("WWW-Authenticate")
-//                 .WithOrigins(builder.Configuration.GetValue<string>("BaseUrl"));
-//             }
-//         ));
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -146,11 +143,10 @@ builder.Services.Configure<Jwt>(builder.Configuration.GetSection("Jwt"));
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseCors();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -164,12 +160,12 @@ app.MapControllers();
 
 app.UseHangfireDashboard("/hangfire", new DashboardOptions
 {
-    Authorization = new[] {
+    Authorization = [
       new HangfireCustomBasicAuthenticationFilter {
         User = "MoodVerseHangfire",
         Pass = "54N$E9o5YA0x"
       }
-    }
+    ]
 });
 
 app.Run();

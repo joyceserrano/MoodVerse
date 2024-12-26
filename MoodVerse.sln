@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Repository", "Moo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Data", "MoodVerse.Data\MoodVerse.Data.csproj", "{BC9133B0-423E-499E-A170-2245DF68EB77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodVerse.Web.Server", "MoodVerse.Web\MoodVerse.Web.Server\MoodVerse.Web.Server.csproj", "{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodVerse.Web.Server", "MoodVerse.Web\MoodVerse.Web.Server\MoodVerse.Web.Server.csproj", "{EE2B764C-37AF-4FE5-825D-5956DE5CE56C}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "moodverse.web.client", "MoodVerse.Web\moodverse.web.client\moodverse.web.client.esproj", "{8545C490-0317-4469-89FB-3C0C83A42010}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "moodverse.site", "MoodVerse.Site\moodverse.site.esproj", "{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,12 @@ Global
 		{8545C490-0317-4469-89FB-3C0C83A42010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8545C490-0317-4469-89FB-3C0C83A42010}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8545C490-0317-4469-89FB-3C0C83A42010}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0ECFF51-7D4A-45A8-BD1A-91ADB5D33050}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
